@@ -33,6 +33,9 @@
 		test.capture [[
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
 	<RemoteProjectDir>$(RemoteRootDir)/tests</RemoteProjectDir>
+	<OutDir>bin\Debug\</OutDir>
+	<IntDir>obj\Debug\</IntDir>
+	<TargetName>MyProject</TargetName>
 </PropertyGroup>
 		]]
 	end

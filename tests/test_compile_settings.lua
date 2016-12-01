@@ -107,3 +107,67 @@
 </ClCompile>
 		]]
 	end
+
+--
+-- Check symbols
+--
+
+	function suite.runtimeTypeInfo_onSymbols_onLinux()
+		symbols "On"
+		prepare()
+		test.capture [[
+<ClCompile>
+	<PrecompiledHeader>NotUsing</PrecompiledHeader>
+	<DebugInformationFormat>FullDebug</DebugInformationFormat>
+	<Optimization>Disabled</Optimization>
+	<CLanguageStandard>Default</CLanguageStandard>
+	<CppLanguageStandard>Default</CppLanguageStandard>
+</ClCompile>
+		]]
+	end
+
+	function suite.runtimeTypeInfo_onNoSymbols_onLinux()
+		symbols "Off"
+		prepare()
+		test.capture [[
+<ClCompile>
+	<PrecompiledHeader>NotUsing</PrecompiledHeader>
+	<DebugInformationFormat>None</DebugInformationFormat>
+	<Optimization>Disabled</Optimization>
+	<CLanguageStandard>Default</CLanguageStandard>
+	<CppLanguageStandard>Default</CppLanguageStandard>
+</ClCompile>
+		]]
+	end
+
+--
+-- Check exception handling
+--
+
+	function suite.runtimeTypeInfo_onExceptions_onLinux()
+		exceptionhandling "On"
+		prepare()
+		test.capture [[
+<ClCompile>
+	<PrecompiledHeader>NotUsing</PrecompiledHeader>
+	<Optimization>Disabled</Optimization>
+	<ExceptionHandling>Enabled</ExceptionHandling>
+	<CLanguageStandard>Default</CLanguageStandard>
+	<CppLanguageStandard>Default</CppLanguageStandard>
+</ClCompile>
+		]]
+	end
+
+	function suite.runtimeTypeInfo_onNoExceptions_onLinux()
+		exceptionhandling "Off"
+		prepare()
+		test.capture [[
+<ClCompile>
+	<PrecompiledHeader>NotUsing</PrecompiledHeader>
+	<Optimization>Disabled</Optimization>
+	<ExceptionHandling>Disabled</ExceptionHandling>
+	<CLanguageStandard>Default</CLanguageStandard>
+	<CppLanguageStandard>Default</CppLanguageStandard>
+</ClCompile>
+		]]
+	end

@@ -124,6 +124,9 @@ p.override(p.vstudio.vc2010.elements, "outputProperties", function(oldfn, cfg)
 	else
 		return {
 			m.remoteProjectDir,
+			p.vstudio.vc2010.outDir,
+			p.vstudio.vc2010.intDir,
+			p.vstudio.vc2010.targetName,
 		}
 	end
 end)
@@ -175,6 +178,31 @@ p.override(p.vstudio.vc2010, "runtimeTypeInfo", function(oldfn, cfg)
 			p.vstudio.vc2010.element("RuntimeTypeInfo", nil, "false")
 		elseif cfg.rtti == p.ON then
 			p.vstudio.vc2010.element("RuntimeTypeInfo", nil, "true")
+		end
+	else
+		oldfn(cfg)
+	end
+end)
+
+p.override(p.vstudio.vc2010, "debugInformationFormat", function(oldfn, cfg)
+	if _ACTION == "vs2015" and cfg.system == p.LINUX then
+		-- Is "Minimal" the same as "FastLink"?
+		if cfg.symbols == p.OFF then
+			p.vstudio.vc2010.element("DebugInformationFormat", nil, "None")
+		elseif cfg.symbols == p.ON then
+			p.vstudio.vc2010.element("DebugInformationFormat", nil, "FullDebug")
+		end
+	else
+		oldfn(cfg)
+	end
+end)
+
+p.override(p.vstudio.vc2010, "exceptionHandling", function(oldfn, cfg)
+	if _ACTION == "vs2015" and cfg.system == p.LINUX then
+		if cfg.exceptionhandling == p.OFF then
+			p.vstudio.vc2010.element("ExceptionHandling", nil, "Disabled")
+		elseif cfg.exceptionhandling == p.ON then
+			p.vstudio.vc2010.element("ExceptionHandling", nil, "Enabled")
 		end
 	else
 		oldfn(cfg)
